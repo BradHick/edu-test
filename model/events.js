@@ -14,8 +14,8 @@ const event = {
     fetchEventsFulfiled: (state, payload) => {
       if (payload.length > 0){
         return state.merge({
-          events: state.commits.concat(payload),
-          eventPage: state.commitPage + 1,
+          events: state.events.concat(payload),
+          eventPage: state.eventPage + 1,
           loading: false
         });
       }
@@ -49,7 +49,7 @@ const event = {
     fetchCommits(params,state){
       const { eventPage, hasMoreEvents } = state.event;
       if (hasMoreEvents){
-        dispatch.commit.fetchCommitsPending();
+        dispatch.event.fetchCommitsPending();
         //https://frontend-test.agendaedu.com/api/events?limit=1;page=1
         return fetch(`https://frontend-test.agendaedu.com/api/events?limit=10;page=${eventPage}`)
           .then(res => {
