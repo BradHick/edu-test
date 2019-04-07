@@ -1,5 +1,6 @@
 import Immutable from 'seamless-immutable';
 
+const API_URL = 'https://frontend-test.agendaedu.com/api/';
 const initialState = new Immutable({
   events: [],
   errors: {},
@@ -51,7 +52,8 @@ const event = {
       if (hasMoreEvents){
         dispatch.event.fetchCommitsPending();
         //https://frontend-test.agendaedu.com/api/events?limit=1;page=1
-        return fetch(`https://frontend-test.agendaedu.com/api/events?limit=10;page=${eventPage}`)
+        return fetch(`${API_URL}events?limit=10;page=${eventPage}`, { method: 'get' })
+          .then(resp => resp.json())
           .then(res => {
             dispatch.event.fetchEventsFulfiled(res.data);
           })
