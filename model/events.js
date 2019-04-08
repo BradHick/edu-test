@@ -1,4 +1,5 @@
 import Immutable from 'seamless-immutable';
+import axios from 'axios';
 
 const API_URL = 'https://frontend-test.agendaedu.com/api/';
 const initialState = new Immutable({
@@ -13,9 +14,9 @@ const event = {
   state: initialState,
   reducers: {
     fetchEventsFulfiled: (state, payload) => {
-      if (payload.length > 0){
+      if (payload.data.length > 0){
         return state.merge({
-          events: state.events.concat(payload),
+          events: state.events.concat(payload.data),
           eventPage: state.eventPage + 1,
           loading: false
         });
@@ -47,13 +48,12 @@ const event = {
     }
   },
   effects: (dispatch) => ({
-    fetchCommits(params,state){
+    fetchEvents(token, state){
       const { eventPage, hasMoreEvents } = state.event;
       if (hasMoreEvents){
-        dispatch.event.fetchCommitsPending();
+        dispatch.event.fetchEventsPending();
         //https://frontend-test.agendaedu.com/api/events?limit=1;page=1
-        return fetch(`${API_URL}events?limit=10;page=${eventPage}`, { method: 'get' })
-          .then(resp => resp.json())
+        return axios.get(`${API_URL}events?limit=10;page=${eventPage}`, {headers: {'Content-Type': 'application/json', token: token} })
           .then(res => {
             dispatch.event.fetchEventsFulfiled(res.data);
           })
