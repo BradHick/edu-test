@@ -1,6 +1,5 @@
 import { init } from "@rematch/core";
 import models from '../model';
-import { AsyncStorage } from 'react-native';
 
 describe('The auth process', () => {
   test('Should authenticate and return a token', async () => {
@@ -19,10 +18,6 @@ describe('The auth process', () => {
     const authData = store.getState().auth;
     expect(authData).toBeTruthy();
     expect(authData.token).toBeTruthy();
-    AsyncStorage.getItem('authToken')
-      .then(res => {
-        expect(res).toBeTruthy();
-      })
   });
 
   test('Should return an error when email was invalid', async () => {
@@ -61,62 +56,5 @@ describe('The auth process', () => {
     expect(authData.token).toBeFalsy();
     expect(authData.errors).toBeTruthy();
     expect(authData.errors.response.data.message).toBe('Invalid email or password');
-  });
-
-  test('Should have a token on AsyncStorage when login was successful', async () =>{
-    const store = init({
-      models
-    });
-
-    //valid user
-    const user = {
-      email: 'student@ae.com',
-      password: '123456'
-    };
-
-    await store.dispatch.auth.login(user);
-
-    AsyncStorage.getItem('authToken')
-      .then(res => {
-        expect(res).toBeTruthy();
-      })
-  });
-
-  test('Should not have a token on AsyncStorage when email was invalid', async () =>{
-    const store = init({
-      models
-    });
-
-    //invalid user email
-    const user = {
-      email: 'student@aei.com',
-      password: '123456'
-    };
-
-    await store.dispatch.auth.login(user);
-
-    AsyncStorage.getItem('authToken')
-      .then(res => {
-        expect(res).toBeFalsy();
-      })
-  });
-
-  test('Should not have a token on AsyncStorage when password was invalid', async () =>{
-    const store = init({
-      models
-    });
-
-    //invalid user password
-    const user = {
-      email: 'student@ae.com',
-      password: '1234567'
-    };
-
-    await store.dispatch.auth.login(user);
-
-    AsyncStorage.getItem('authToken')
-      .then(res => {
-        expect(res).toBeFalsy();
-      })
   });
 });
