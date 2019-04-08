@@ -1,6 +1,5 @@
 import Immutable from 'seamless-immutable';
 import axios from 'axios';
-import { AsyncStorage } from 'react-native';
 
 const API_URL = 'https://frontend-test.agendaedu.com/api/login';
 const initialState = new Immutable({
@@ -27,6 +26,7 @@ const auth = {
     },
     authUserRejected: (state, payload) => {
       return state.merge({
+        token: '',
         errors: payload.errors || payload,
         loading: false
       });
@@ -39,13 +39,9 @@ const auth = {
       return axios.post(API_URL, { email, password })
         .then(res => {
           dispatch.auth.authUserFulfiled({email, token: res.data.token});
-          AsyncStorage.setItem('authToken', res.data.token)
-            .then(res => console.log('authToken', res))
         })
         .catch(err =>{
           dispatch.auth.authUserRejected(err);
-          AsyncStorage.removeItem('authToken')
-            .then(res => console.log('authToken', res));
         })
     }
   })
