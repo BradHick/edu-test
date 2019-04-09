@@ -14,9 +14,8 @@ describe('The Events process', () => {
     };
 
     await store.dispatch.auth.login(user);
-    const authData = store.getState().auth;
 
-    await store.dispatch.event.fetchEvents(authData.token);
+    await store.dispatch.event.fetchEvents();
 
 
     const eventData = store.getState().event;
@@ -38,9 +37,8 @@ describe('The Events process', () => {
     };
 
     await store.dispatch.auth.login(user);
-    const authData = store.getState().auth;
 
-    await store.dispatch.event.fetchEvents(authData.token);
+    await store.dispatch.event.fetchEvents();
 
 
     const eventData = store.getState().event;
@@ -62,9 +60,9 @@ describe('The Events process', () => {
     };
 
     await store.dispatch.auth.login(user);
-    const authData = store.getState().auth;
+    
 
-    await store.dispatch.event.fetchEvents(authData.token);
+    await store.dispatch.event.fetchEvents();
 
 
     const eventData = store.getState().event;
@@ -92,9 +90,9 @@ describe('The Events process', () => {
     };
 
     await store.dispatch.auth.login(user);
-    const authData = store.getState().auth;
+    
 
-    await store.dispatch.event.fetchEvents(authData.token);
+    await store.dispatch.event.fetchEvents();
 
 
     const eventData = store.getState().event;
@@ -102,7 +100,7 @@ describe('The Events process', () => {
     expect(eventData.events).toBeTruthy();
     expect(eventData.events.length).toBe(10);
 
-    await store.dispatch.event.fetchEvents(authData.token);
+    await store.dispatch.event.fetchEvents();
 
     const eventDataModified = store.getState().event;
 
