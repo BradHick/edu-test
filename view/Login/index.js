@@ -3,16 +3,16 @@ import { View, Text, StyleSheet, Button } from 'react-native';
 import container from './container';
 
 
-const goToEvents = () => {
-  this.props.navigation.navigate('Events');
-};
+
 
 class Login extends Component {
-
+  goToEvents = () => {
+    this.props.navigation.navigate('Events');
+  };
   render = () => (
     <View style={styles.container}>
       <Text style={styles.text}>Tela de Login</Text>
-      <Button title='Vai para lista de eventos' onPress={goToEvents} />
+      <Button title='Vai para lista de eventos' onPress={this.goToEvents} />
     </View>
   );
 };

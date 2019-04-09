@@ -10,6 +10,7 @@ export default class App extends Component {
     return (
       <Provider store={store}>
         <View style={styles.container}>
+          <Text>Testes</Text>
           <Router />
         </View>
       </Provider>
