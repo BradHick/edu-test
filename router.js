@@ -1,21 +1,23 @@
-import { StackNavigation } from 'react-navigation';
+import { createStackNavigator, createAppContainer } from 'react-navigation';
 
 import Login from './view/Login';
 import Events from './view/Events';
 import Event from './view/Events/Component/Event';
 
 
-const router = StackNavigation({
+const Router = createStackNavigator({
   Login: {
-    Screen: Login
+    screen: Login
   },
   Events: {
-    Screen: Events
+    screen: Events
   },
   Event: {
-    Screen: Event
+    screen: Event
   }
+}, {
+  initialRouteName: 'Login'
 });
 
-export default router;
+export default createAppContainer(Router);
 
