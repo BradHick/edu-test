@@ -48,11 +48,11 @@ const event = {
     }
   },
   effects: (dispatch) => ({
-    fetchEvents(token, state){
+    fetchEvents(foo, state){
       const { eventPage, hasMoreEvents } = state.event;
+      const { token } = state.auth
       if (hasMoreEvents){
         dispatch.event.fetchEventsPending();
-        //https://frontend-test.agendaedu.com/api/events?limit=1;page=1
         return axios.get(`${API_URL}events?limit=10;page=${eventPage}`, {headers: {'Content-Type': 'application/json', token: token} })
           .then(res => {
             dispatch.event.fetchEventsFulfiled(res.data);
