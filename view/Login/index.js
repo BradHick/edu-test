@@ -1,19 +1,41 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Button } from 'react-native';
+import { StyleSheet, Image, Text, View, KeyboardAvoidingView } from 'react-native';
+import {Container, Title, Label, TextInput, FormGroup, Button} from './Components';
 import container from './container';
-
+import Key from '../../assets/key.png';
+import Mail from '../../assets/mail.svg';
+import Eye from '../../assets/eye.svg';
 
 
 
 class Login extends Component {
+
+  static navigationOptions = ({navigation}) =>({
+    header: null
+  });
+
   goToEvents = () => {
     this.props.navigation.navigate('Events');
   };
   render = () => (
-    <View style={styles.container}>
-      <Text style={styles.text}>Tela de Login</Text>
-      <Button title='Vai para lista de eventos' onPress={this.goToEvents} />
-    </View>
+    <KeyboardAvoidingView behavior='padding' enabled>
+      <Container>
+        <Title>Faça seu login <Image source={Key} style={styles.image}/></Title> 
+          <FormGroup>
+            <Label>E-mail ou usuário</Label>
+            <TextInput type="text" icon={Mail}/>
+          </FormGroup>
+          <FormGroup>
+            <Label>Senha</Label>
+            <TextInput type="password" icon={Eye}/>
+          </FormGroup>
+          <FormGroup>
+            <Button>
+              <Text style ={styles.textButton}>Enviar</Text>
+            </Button>
+          </FormGroup>
+      </Container>
+    </KeyboardAvoidingView>
   );
 };
 
@@ -25,6 +47,16 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 60,
+  },
+  textButton: {
+    fontSize: 20,
+    textAlign: 'center',
+    fontWeight: 'bold',
+    color: '#fff'
+  },
+  image: { 
+    height:25,
+    width:25
   }
 });
 
