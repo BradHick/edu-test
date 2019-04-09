@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "@rematch/core": "^1.1.0",
+    "@rematch/persist": "^1.1.6",
     "axios": "^0.18.0",
     "react": "16.8.3",
     "react-native": "^0.59.4",
