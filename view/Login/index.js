@@ -23,11 +23,11 @@ class Login extends Component {
         <Title>Faça seu login <Image source={Key} style={styles.image}/></Title> 
           <FormGroup>
             <Label>E-mail ou usuário</Label>
-            <TextInput type="text" icon={Mail}/>
+            <TextInput icon={Mail}/>
           </FormGroup>
           <FormGroup>
             <Label>Senha</Label>
-            <TextInput type="password" icon={Eye}/>
+            <TextInput secureTextEntry={true} icon={Eye}/>
           </FormGroup>
           <FormGroup>
             <Button>
