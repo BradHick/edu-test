@@ -41,13 +41,15 @@ const EventItemContent = styled.View`
 	flex: 1;
 	width: 100%;
 	background: #FFFFFF;
+	z-index: 1;
+	margin-top: -25px;
 	border-top-left-radius: 30;
 	border-top-right-radius: 30;
 `
 
 const EventItemHeader = styled.Image`
 	width: 100%;
-	height: 250px;
+	height: 270px;
 `;
 
 
