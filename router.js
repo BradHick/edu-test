@@ -16,7 +16,7 @@ const Router = createStackNavigator({
     screen: Event
   }
 }, {
-  initialRouteName: 'Event'
+  initialRouteName: 'Events'
 });
 
 export default createAppContainer(Router);
