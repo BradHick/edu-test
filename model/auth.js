@@ -1,5 +1,6 @@
 import Immutable from 'seamless-immutable';
 import axios from 'axios';
+import { Alert } from 'react-native';
 
 const API_URL = 'https://frontend-test.agendaedu.com/api/login';
 const initialState = new Immutable({
@@ -16,6 +17,7 @@ const auth = {
       return state.merge({
         email: payload.email,
         token: payload.token,
+        errors: {},
         loading: false
       });
     },
@@ -27,6 +29,7 @@ const auth = {
     authUserRejected: (state, payload) => {
       return state.merge({
         token: '',
+        email: '',
         errors: payload.errors || payload,
         loading: false
       });
@@ -41,6 +44,10 @@ const auth = {
           dispatch.auth.authUserFulfiled({email, token: res.data.token});
         })
         .catch(err =>{
+          Alert.alert(
+            'Erro',
+            `${err.response.data.message}`
+          );
           dispatch.auth.authUserRejected(err);
         })
     }

@@ -1,44 +1,85 @@
 import React, { Component } from 'react';
-import { StyleSheet, Image, Text, View, KeyboardAvoidingView } from 'react-native';
+import { StyleSheet, Image, Text, View, KeyboardAvoidingView, ActivityIndicator } from 'react-native';
 import {Container, Title, Label, TextInput, FormGroup, Button, Content} from './Components';
 import container from './container';
+import get from 'lodash/get';
 import Key from '../../assets/key.png';
-import Mail from '../../assets/mail.svg';
-import Eye from '../../assets/eye.svg';
+
 
 
 
 class Login extends Component {
 
+  state = {
+    user: {
+      email: '',
+      password: ''
+    }
+  };
+
   static navigationOptions = ({navigation}) =>({
     header: null
   });
 
+  handleChangeEmail = (email) => {
+    this.setState({...this.state, user: {...this.state.user, email}})
+  };
+
+  handleChangePassword = (password) => {
+    this.setState({...this.state, user: {...this.state.user, password}})
+  };
+
   goToEvents = () => {
     this.props.navigation.navigate('Events');
   };
-  render = () => (
-    <Container>
-      <Content>
-        <View>
-          <Title>Faça seu login <Image source={Key} style={styles.image}/></Title> 
-          <FormGroup>
-            <Label>E-mail ou usuário</Label>
-            <TextInput icon={Mail}/>
-          </FormGroup>
-          <FormGroup>
-            <Label>Senha</Label>
-            <TextInput secureTextEntry={true} icon={Eye}/>
-          </FormGroup>
-        </View>
-      </Content>
-      <FormGroup>
-        <Button onPress={this.goToEvents}>
-          <Text style ={styles.textButton}>Enviar</Text>
-        </Button>
-      </FormGroup>
-    </Container>
-  );
+
+  componentWillMount(){
+    const { token } = this.props;
+    if (token != ''){
+      this.goToEvents();
+    }
+  }
+
+  shouldComponentUpdate(nextProps){
+    if ((this.props.token !== nextProps.token) && nextProps.token !== ''){
+      this.goToEvents();
+    }
+    return true;
+  }
+
+  render = () => {
+    const { login, email, token, loading, errors } = this.props;
+    return (
+      <Container>
+        <Content>
+          <View>
+            <Title>Faça seu login <Image source={Key} style={styles.image}/></Title> 
+            <FormGroup>
+              <Label>E-mail ou usuário:</Label>
+              <TextInput
+                placeholder='Email'
+                onChangeText={this.handleChangeEmail}
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label>Senha:</Label>
+              <TextInput
+                secureTextEntry={true}
+                placeholder='Password'
+                onChangeText={this.handleChangePassword}
+              />
+            </FormGroup>
+            { loading && <ActivityIndicator size='large' color='#733DBE'/> }
+          </View>
+        </Content>
+        <FormGroup>
+          <Button onPress={() => login(this.state.user)}>
+            <Text style={styles.textButton}>Enviar</Text>
+          </Button>
+        </FormGroup>
+      </Container>
+    );
+  }
 };
 
 
@@ -46,9 +87,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20
-  },
-  text: {
-    fontSize: 60,
   },
   textButton: {
     fontSize: 20,
