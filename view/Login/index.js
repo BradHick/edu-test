@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { StyleSheet, Image, Text, View, KeyboardAvoidingView, ActivityIndicator } from 'react-native';
+import { StyleSheet, Image, Text, View, ActivityIndicator } from 'react-native';
 import {Container, Title, Label, TextInput, FormGroup, Button, Content} from './Components';
 import container from './container';
-import get from 'lodash/get';
 import Key from '../../assets/key.png';
 
 
@@ -48,8 +47,8 @@ class Login extends Component {
   }
 
   render = () => {
-    const { login, email, token, loading, errors } = this.props;
-    return (
+    const { login, loading } = this.props;
+    return (   
       <Container>
         <Content>
           <View>
