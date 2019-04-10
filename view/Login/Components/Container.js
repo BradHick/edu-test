@@ -2,8 +2,8 @@ import styled from 'styled-components/native';
 
 
 const Container = styled.View`
-	display: flex;
-	padding: 10px;
+	flex: 1;
+	padding: 20px 30px;
 `;
 
 

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, Image, Text, View, KeyboardAvoidingView } from 'react-native';
-import {Container, Title, Label, TextInput, FormGroup, Button} from './Components';
+import {Container, Title, Label, TextInput, FormGroup, Button, Content} from './Components';
 import container from './container';
 import Key from '../../assets/key.png';
 import Mail from '../../assets/mail.svg';
@@ -18,9 +18,10 @@ class Login extends Component {
     this.props.navigation.navigate('Events');
   };
   render = () => (
-    <KeyboardAvoidingView behavior='padding' enabled>
-      <Container>
-        <Title>Faça seu login <Image source={Key} style={styles.image}/></Title> 
+    <Container>
+      <Content>
+        <View>
+          <Title>Faça seu login <Image source={Key} style={styles.image}/></Title> 
           <FormGroup>
             <Label>E-mail ou usuário</Label>
             <TextInput icon={Mail}/>
@@ -29,13 +30,14 @@ class Login extends Component {
             <Label>Senha</Label>
             <TextInput secureTextEntry={true} icon={Eye}/>
           </FormGroup>
-          <FormGroup>
-            <Button>
-              <Text style ={styles.textButton}>Enviar</Text>
-            </Button>
-          </FormGroup>
-      </Container>
-    </KeyboardAvoidingView>
+        </View>
+      </Content>
+      <FormGroup>
+        <Button onPress={this.goToEvents}>
+          <Text style ={styles.textButton}>Enviar</Text>
+        </Button>
+      </FormGroup>
+    </Container>
   );
 };
 
