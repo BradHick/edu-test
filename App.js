@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View} from 'react-native';
 import store from './store';
 import { Provider } from 'react-redux';
 import Router from './router';
@@ -16,18 +15,10 @@ export default class App extends Component {
     return (
       <PersistGate persistor={persistor}>
         <Provider store={store}>
-          <View style={styles.container}>
-            <Router />
-          </View>
+          <Router />
         </Provider>
       </PersistGate>
     );
   }
-}
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 20
-  }
-});
