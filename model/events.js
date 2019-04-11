@@ -1,5 +1,6 @@
 import Immutable from 'seamless-immutable';
 import axios from 'axios';
+import { Alert } from 'react-native';
 
 const API_URL = 'https://frontend-test.agendaedu.com/api/';
 const initialState = new Immutable({
@@ -58,6 +59,10 @@ const event = {
             dispatch.event.fetchEventsFulfiled(res.data);
           })
           .catch(err =>{
+            Alert.alert(
+              'Erro',
+              `${err.response.data.message}`
+            );
             dispatch.event.fetchEventsRejected(err);
           });
       }

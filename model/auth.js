@@ -5,7 +5,8 @@ import { Alert } from 'react-native';
 const API_URL = 'https://frontend-test.agendaedu.com/api/login';
 const initialState = new Immutable({
   email: '',
-  token: '3O701JINSMVIRtuuB7fY1SZ37bYIqDoPTs1auRYzHzLzxXXcuxvptQaowASztVJzAnGl6X00MRIZYjOTAN9SDt0rMZ47EfCNrAWB2oadSedsKbGGx2FRE9HnnloCs0sbONRvpqg5YmI7lrZ90RhrKGI',
+  token: '',
+  // token: '3O701JINSMVIRtuuB7fY1SZ37bYIqDoPTs1auRYzHzLzxXXcuxvptQaowASztVJzAnGl6X00MRIZYjOTAN9SDt0rMZ47EfCNrAWB2oadSedsKbGGx2FRE9HnnloCs0sbONRvpqg5YmI7lrZ90RhrKGI',
   loading: false,
   errors: {}
 });
@@ -33,6 +34,9 @@ const auth = {
         errors: payload.errors || payload,
         loading: false
       });
+    },
+    logout: (state) => {
+      return state.merge(initialState)
     }
   },
   effects: (dispatch) => ({
