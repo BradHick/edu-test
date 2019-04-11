@@ -29,7 +29,7 @@ class Login extends Component {
   };
 
   goToEvents = () => {
-    this.props.navigation.navigate('Events');
+    this.props.navigation.navigate('Auth');
   };
 
   componentWillMount(){
