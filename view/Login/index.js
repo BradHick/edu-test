@@ -73,7 +73,7 @@ class Login extends Component {
         </Content>
         <FormGroup>
           <Button onPress={() => login(this.state.user)}>
-            <Text style={styles.textButton}>Enviar</Text>
+            <Text style={styles.textButton}>Entrar</Text>
           </Button>
         </FormGroup>
       </Container>
