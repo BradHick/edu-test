@@ -55,7 +55,7 @@ const EventItemHeader = styled.Image`
 
 const EventItem = (props) => (
 	<View style={{ flex: 1 }}>
-		<EventItemHeader source={props.poster} />
+		<EventItemHeader source={{ uri: props.poster }} />
 		<EventItemContent>
 			<View style={{ flexDirection: 'row' }}>
 				<EventItemDate>

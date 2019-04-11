@@ -58,14 +58,14 @@ const Event = (props) => (
 
 	<EventWrapper onPress={props.onPress}>
 		<EventContent>
-			{props.poster ? <Poster source={props.poster}/> : null}
-			<View>
+			{props.poster ? <Poster source={{ uri: props.poster }}/> : null}
+			<View style={{flex:1}}>
 				<EventLabel>Eventos</EventLabel>
 				<EventTitle>{props.title}</EventTitle>
 				<EventTime>
 					{props.time}
 				</EventTime>
-				<EventDate>{props.date}</EventDate>
+					<EventDate>{props.date}</EventDate>
 			</View>
 		</EventContent>
 	</EventWrapper>
