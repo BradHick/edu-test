@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import moment from 'moment';
 import brLocale from 'moment/locale/pt-br';
-import groupBy from 'lodash/groupBy';
-import mapValues from 'lodash/mapValues';
-import values from 'lodash/values';
 import { View, Button, Text, StyleSheet, ActivityIndicator, SectionList } from 'react-native';
 import container from './container';
+import { groupBy, mapValues } from '../../helpers';
 import { Container, Day, EventListItem, Button as CustomButton } from './Component';
 
 moment.locale('pt-br', brLocale);
@@ -61,6 +59,8 @@ class Events extends Component {
     }
   }
 
+  
+
   groupEvents = (events) => {
     const groupedEvents = groupBy(events, (event) => moment(event.startAt).format('dddd, DD MMMM'));
     const groupEventsTemp = mapValues(groupedEvents, (value, key) => {
@@ -69,7 +69,7 @@ class Events extends Component {
         data: value
       }
      });
-     return values(groupEventsTemp);
+     return Object.values(groupEventsTemp);
   }
   
 
